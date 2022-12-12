@@ -1,3 +1,8 @@
+"""
+Estimated time : 30 minutes
+Actual time : 20 minutes
+"""
+
 AGE_LIMIT = 50
 CURRENT_YEAR = 2022
 

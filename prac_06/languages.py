@@ -1,3 +1,8 @@
+"""
+Estimated time : 30 minutes
+Actual time : 40 minutes
+"""
+
 from prac_06.programming_language import ProgrammingLanguage
 
 python = ProgrammingLanguage("Python", "Dynamic", True, 1991)
