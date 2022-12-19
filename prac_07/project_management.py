@@ -16,23 +16,38 @@ def main():
         data = in_file.readlines()
         extract_data(data)
         add_to_class()
-        # choice = get_choice()
-        # while choice != "Q":
-        #     if choice == "L":
-        #         pass
-        #     elif choice == "S":
-        #         pass
-        #     elif choice == "D":
-        #         pass
-        #     elif choice == "F":
-        #         pass
-        #     elif choice == "A":
-        #         pass
-        #     elif choice == "U":
-        #         pass
-        #     else:
-        #         print("Invalid Choice")
-        #     choice = get_choice()
+        choice = get_choice()
+        while choice != "Q":
+            if choice == "L":
+                filename = input("Filename: ")
+                input_file = open(filename, "r")
+                in_file = input_file.readlines()
+                extract_data(in_file)
+                input_file.close()
+            elif choice == "S":
+                filename = input("Filename: ")
+                output_file = open(filename, "w")
+                for project in class_projects:
+                    print(project, file=output_file)
+                output_file.close()
+            elif choice == "D":
+                print("Incomplete Project: ")
+                for project in class_projects:
+                    if project.completion_percentage < 100:
+                        print(project)
+                print("Completed Projects: ")
+                for project in class_projects:
+                    if project.completion_percentage == 100:
+                        print(project)
+            elif choice == "F":
+                pass
+            elif choice == "A":
+                pass
+            elif choice == "U":
+                pass
+            else:
+                print("Invalid Choice")
+            choice = get_choice()
 
 
 def add_to_class():
