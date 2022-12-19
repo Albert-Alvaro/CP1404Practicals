@@ -11,6 +11,7 @@ MENU = """- (L)oad projects
 class_projects = []
 update_dictionary = {}
 
+
 def main():
     with open("projects.txt", "r", encoding="utf-8-sig") as in_file:
         data = in_file.readlines()
@@ -56,7 +57,12 @@ def main():
         elif choice == "U":
             for i, project in enumerate(class_projects, 0):
                 print(f"{i} {project.name}, start:{project.start_date}, priority {project.priority}, estimate: ${project.cost_estimate}, completion: {project.completion_percentage}% ")
-
+                update_dictionary[i] = project
+            project_choice = int(input("Project choice: "))
+            print(update_dictionary[project_choice])
+            new_percentage = int(input("New Percentage: "))
+            new_priority = int(input("New Priority: "))
+            class_projects[project_choice] = Project(class_projects[project_choice].name, class_projects[project_choice].start_date, int(new_priority), float(class_projects[project_choice].cost_estimate), int(new_percentage))
         else:
             print("Invalid Choice")
         choice = get_choice()
