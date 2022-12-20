@@ -2,9 +2,9 @@ import datetime
 
 
 class Project:
-    def __init__(self, name="", start_date="", priority=int, cost_estimate=float, completion_percentage=int):
+    def __init__(self, name, start_date, priority=int, cost_estimate=float, completion_percentage=int):
         self.name = name
-        self.start_date = date = datetime.datetime.strptime(start_date, "%d/%m/%Y").date()
+        self.start_date = start_date
         self.priority = priority
         self.cost_estimate = cost_estimate
         self.completion_percentage = completion_percentage
@@ -21,9 +21,6 @@ class Project:
             return True
         else:
             return False
-
-    def compare_date(self, input_date):
-        return self.start_date > input_date
 
     def lt_date(self, other):
         return

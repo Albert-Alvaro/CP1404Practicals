@@ -44,7 +44,7 @@ def main():
                 if project.is_completed():
                     print(project)
         elif choice == "F":
-            date_string = input('Show projects that start after date (dd/mm/yy): ')
+            date_string = str(input('Show projects that start after date (dd/mm/yy): '))
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
             sorted_filtered_projects = []
             sort_project_by_date(date, sorted_filtered_projects)
@@ -67,10 +67,7 @@ def main():
             print(project_dictionary[project_choice])
             new_percentage = int(input("New Percentage: "))
             new_priority = int(input("New Priority: "))
-            class_projects[project_choice] = Project(class_projects[project_choice].name,
-                                                     class_projects[project_choice].start_date, int(new_priority),
-                                                     float(class_projects[project_choice].cost_estimate),
-                                                     int(new_percentage))
+            class_projects[project_choice] = Project(class_projects[project_choice].name, class_projects[project_choice].start_date, int(new_priority), float(class_projects[project_choice].cost_estimate), int(new_percentage))
         else:
             print("Invalid Choice")
         choice = get_choice()
@@ -104,8 +101,10 @@ def filter_dates(filtered_dates, filtered_projects):
 
 def filter_projects(date, filtered_projects):
     for project in class_projects:
-        if project.compare_date(date):
+        project.start_date = datetime.datetime.strptime(str(project.start_date), "%d/%m/%Y").date()
+        if project.start_date > date:
             filtered_projects.append(project)
+        project.start_date = project.start_date.strftime("%d/%m/%Y")
 
 
 def get_choice():
