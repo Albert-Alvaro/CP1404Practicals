@@ -9,7 +9,7 @@ MENU = """- (L)oad projects
 - (U)pdate project
 - (Q)uit"""
 class_projects = []
-update_dictionary = {}
+project_dictionary = {}
 
 
 def main():
@@ -44,8 +44,12 @@ def main():
                 if project.is_completed():
                     print(project)
         elif choice == "F":
-            date_string = input("Show projects that start after date (dd/mm/yyyy): ")
+            date_string = input('Show projects that start after date (dd/mm/yy): ')
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+            sorted_filtered_projects = []
+            sort_by_date(date, sorted_filtered_projects)
+            for project in sorted_filtered_projects:
+                print(project)
         elif choice == "A":
             print("Let's add a new project")
             name = input("Name: ")
@@ -56,17 +60,35 @@ def main():
             class_projects.append(Project(name, start_date, priority, cost_estimate, completion_percentage))
         elif choice == "U":
             for i, project in enumerate(class_projects, 0):
-                print(f"{i} {project.name}, start:{project.start_date}, priority {project.priority}, estimate: ${project.cost_estimate}, completion: {project.completion_percentage}% ")
-                update_dictionary[i] = project
+                print(
+                    f"{i} {project.name}, start:{project.start_date}, priority {project.priority}, estimate: ${project.cost_estimate}, completion: {project.completion_percentage}% ")
+                project_dictionary[i] = project
             project_choice = int(input("Project choice: "))
-            print(update_dictionary[project_choice])
+            print(project_dictionary[project_choice])
             new_percentage = int(input("New Percentage: "))
             new_priority = int(input("New Priority: "))
-            class_projects[project_choice] = Project(class_projects[project_choice].name, class_projects[project_choice].start_date, int(new_priority), float(class_projects[project_choice].cost_estimate), int(new_percentage))
+            class_projects[project_choice] = Project(class_projects[project_choice].name,
+                                                     class_projects[project_choice].start_date, int(new_priority),
+                                                     float(class_projects[project_choice].cost_estimate),
+                                                     int(new_percentage))
         else:
             print("Invalid Choice")
         choice = get_choice()
     print("Thank you for using custom-built project management software.")
+
+
+def sort_by_date(date, sorted_filtered_projects):
+    filtered_projects = []
+    filtered_dates = []
+    for project in class_projects:
+        if project.compare_date(date):
+            filtered_projects.append(project)
+    for project in filtered_projects:
+        filtered_dates.append(project.start_date)
+    for date in sorted(filtered_dates):
+        for project in filtered_projects:
+            if date == project.start_date:
+                sorted_filtered_projects.append(project)
 
 
 def get_choice():
