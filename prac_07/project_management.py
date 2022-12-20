@@ -81,19 +81,31 @@ def sort_project_by_date(date, sorted_filtered_projects):
     filtered_projects = []
     filtered_dates = []
     final_sorted_filtered_dates = []
-    for project in class_projects:
-        if project.compare_date(date):
-            filtered_projects.append(project)
-    for project in filtered_projects:
-        filtered_dates.append(project.start_date)
+    filter_projects(date, filtered_projects)
+    filter_dates(filtered_dates, filtered_projects)
     sorted_filtered_dates = [date for date in sorted(filtered_dates)]
-    for date in sorted_filtered_dates:
-        if date not in final_sorted_filtered_dates:
-            final_sorted_filtered_dates.append(date)
+    sort_filtered_dates(final_sorted_filtered_dates, sorted_filtered_dates)
     for date in final_sorted_filtered_dates:
         for project in filtered_projects:
             if date == project.start_date:
                 sorted_filtered_projects.append(project)
+
+
+def sort_filtered_dates(final_sorted_filtered_dates, sorted_filtered_dates):
+    for date in sorted_filtered_dates:
+        if date not in final_sorted_filtered_dates:
+            final_sorted_filtered_dates.append(date)
+
+
+def filter_dates(filtered_dates, filtered_projects):
+    for project in filtered_projects:
+        filtered_dates.append(project.start_date)
+
+
+def filter_projects(date, filtered_projects):
+    for project in class_projects:
+        if project.compare_date(date):
+            filtered_projects.append(project)
 
 
 def get_choice():
