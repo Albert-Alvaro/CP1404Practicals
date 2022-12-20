@@ -22,6 +22,4 @@ class Project:
         else:
             return False
 
-    def lt_date(self, other):
-        return
 
