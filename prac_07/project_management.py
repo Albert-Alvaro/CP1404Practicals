@@ -47,7 +47,22 @@ def main():
             date_string = input('Show projects that start after date (dd/mm/yy): ')
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
             sorted_filtered_projects = []
-            sort_by_date(date, sorted_filtered_projects)
+            filtered_projects = []
+            filtered_dates = []
+            final_sorted_filtered_dates = []
+            for project in class_projects:
+                if project.compare_date(date):
+                    filtered_projects.append(project)
+            for project in filtered_projects:
+                filtered_dates.append(project.start_date)
+            sorted_filtered_dates = [date for date in sorted(filtered_dates)]
+            for date in sorted_filtered_dates:
+                if date not in final_sorted_filtered_dates:
+                    final_sorted_filtered_dates.append(date)
+            for date in final_sorted_filtered_dates:
+                for project in filtered_projects:
+                    if date == project.start_date:
+                        sorted_filtered_projects.append(project)
             for project in sorted_filtered_projects:
                 print(project)
         elif choice == "A":
@@ -75,20 +90,6 @@ def main():
             print("Invalid Choice")
         choice = get_choice()
     print("Thank you for using custom-built project management software.")
-
-
-def sort_by_date(date, sorted_filtered_projects):
-    filtered_projects = []
-    filtered_dates = []
-    for project in class_projects:
-        if project.compare_date(date):
-            filtered_projects.append(project)
-    for project in filtered_projects:
-        filtered_dates.append(project.start_date)
-    for date in sorted(filtered_dates):
-        for project in filtered_projects:
-            if date == project.start_date:
-                sorted_filtered_projects.append(project)
 
 
 def get_choice():
