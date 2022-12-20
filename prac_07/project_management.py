@@ -71,7 +71,18 @@ def main():
         else:
             print("Invalid Choice")
         choice = get_choice()
+        autosave()
     print("Thank you for using custom-built project management software.")
+
+
+def autosave():
+    output_file = open("projects.txt", "w")
+    print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=output_file)
+    for project in class_projects:
+        print(
+            f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}",
+            file=output_file)
+    output_file.close()
 
 
 def sort_project_by_date(date, sorted_filtered_projects):
