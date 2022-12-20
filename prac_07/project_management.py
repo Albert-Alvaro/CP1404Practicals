@@ -168,7 +168,6 @@ def validate_percentage(prompt):
     return data
 
 
-
 def autosave():
     output_file = open("projects.txt", "w")
     print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=output_file)
