@@ -53,8 +53,7 @@ def main():
             sort_project_by_date(date, sorted_filtered_projects)
             for project in sorted_filtered_projects:
                 print(project)
-            for project in class_projects:
-                project.start_date = project.start_date.strftime("%d/%m/%Y")
+            restore_datetime()
         elif choice == "A":
             print("Let's add a new project")
             name = input("Name: ")
@@ -72,15 +71,24 @@ def main():
             print(project_dictionary[project_choice])
             new_percentage = validate_percentage("New Percentage: ")
             new_priority = validate_priority("New Priority: ")
-            class_projects[project_choice] = Project(class_projects[project_choice].name,
-                                                     class_projects[project_choice].start_date, int(new_priority),
-                                                     float(class_projects[project_choice].cost_estimate),
-                                                     int(new_percentage))
+            update_project(new_percentage, new_priority, project_choice)
         else:
             print("Invalid Choice")
         choice = get_choice()
     autosave()
     print("Thank you for using custom-built project management software.")
+
+
+def restore_datetime():
+    for project in class_projects:
+        project.start_date = project.start_date.strftime("%d/%m/%Y")
+
+
+def update_project(new_percentage, new_priority, project_choice):
+    class_projects[project_choice] = Project(class_projects[project_choice].name,
+                                             class_projects[project_choice].start_date, int(new_priority),
+                                             float(class_projects[project_choice].cost_estimate),
+                                             int(new_percentage))
 
 
 def sort_project_by_date(date, sorted_filtered_projects):
