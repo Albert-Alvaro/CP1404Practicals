@@ -5,7 +5,6 @@ from kivy.properties import StringProperty
 
 
 class DynamicLabelsApp(App):
-    name_text = StringProperty()
 
     def __init__(self, **kwargs):
         """Construct main app"""
