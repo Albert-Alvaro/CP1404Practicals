@@ -20,6 +20,6 @@ def main():
     print("band (str)")
     print(band)
     print("band.play()")
-    print(band.play())
+    band.play()
 
 main()
